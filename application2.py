@@ -1,10 +1,18 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, request, url_for
+from convert_data import find_users
+
 app = Flask(__name__)
 
 
-@app.route("/")
-def hello():
-    return render_template('home.html', map=url_for('static', filename='map.html'), stacked=url_for('static', filename='stacked-bar.html'), stacked_km=url_for('static', filename='km_months_stacked.html'), controls=url_for('static', filename='controls_months_stacked.html'))
+@app.route("/", methods=['GET'])
+def home():
+    return render_template('home.html')
+
+@app.route("/users", methods=['POST'])
+def person_id():
+    name=request.form['name']
+    users = find_users(name)
+    return render_template('home_users.html', users = users)
 
 @app.route("/about")
 def about():

@@ -218,6 +218,7 @@ def bar_graph_stacked_controls(person_id):
 
 person_id = 3483
 fig = bar_graph_stacked_km(person_id)
+print(fig)
 plotly.offline.plot(fig, filename='D:\oris_files\oris\static\km_months_stacked.html')
 fig2 = bar_graph_stacked_controls(person_id)
 plotly.offline.plot(fig2, filename='D:\oris_files\oris\static\controls_months_stacked.html')

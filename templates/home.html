@@ -4,7 +4,15 @@
 
 <div class="jumbotron text-center">
     <h1>Vítejte na ORIS dashboards</h1>
-    <p class="lead">Dashboardy a vizualizace nad tvými daty ze závodů v orientačním běhu tady a teď.</p>
+    <p class="lead">Vizualizace Vašich dat ze závodů v orientačním běhu tady a teď.</p>
 </div>
+
+<form action="/users" method="post">
+    <label>
+        Zadejte PŘÍJMENÍ:
+        <input type="text" name="name"/>
+    </label>
+    <button type="submit">Confirm</button>
+</form>
 
 {% endblock %}

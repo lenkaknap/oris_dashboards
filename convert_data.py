@@ -87,6 +87,18 @@ def time_data(person_id):
     dataFrame["date"] = to_datetime(dataFrame["date"]).dt.month
     return dataFrame
 
+def find_users (name):
+    conn = sqlite3.connect("orisdb.db")
+    cur = conn.cursor()
+    cur.execute('''select registered.id, firstName, lastName, regNo, clubTxt from registered
+                    LEFT JOIN clubs on registered.clubId = clubs.id
+                    where lastName LIKE ?''', [name+'%'])
+    rows = []
+    for r in cur.fetchall():
+        rows.append(r)
+    conn.close()
+    return rows
+
 # testovaci vystupy metod
 # all_info = all_info(2812)
 # print(all_info)
@@ -102,3 +114,6 @@ def time_data(person_id):
 
 # time_df = time_data(2812)
 # print(time_df)
+
+# users = find_users('Knap')
+# print(users)
