@@ -41,8 +41,9 @@ def map_scatter(person_id):
         ),
     )
     fig = dict(data=data, layout=layout)
-    return fig
+    fig_map = plotly.offline.plot(fig, output_type='div')
+    return fig_map
 
-person_id = 3483
-fig = map_scatter(person_id)
-plotly.offline.plot(fig, filename='D:\oris_files\oris\static\map.html')
+# person_id = 3483
+# fig = map_scatter(person_id)
+# plotly.offline.plot(fig, filename='D:\oris_files\oris\static\map.html')
