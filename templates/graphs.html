@@ -3,11 +3,16 @@
 {% block body %}
 
 
+<h2><b>{{ '{} {}'.format(user_data[0][1], user_data[0][2]) }}</b></h2>
+<h3>{{ '{}, {}'.format(user_data[0][3], user_data[0][4]) }}</h3>
 
-
-<p>Grafy:</p>
-
-{{ div_placeholder }}{{ div_map }}
 {{ div_map }}
+
+{{ div_time }}
+
+{{ div_km }}
+
+{{ div_controls }}
+
 
 {% endblock %}

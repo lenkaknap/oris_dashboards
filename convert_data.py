@@ -1,11 +1,7 @@
 import sqlite3
 import pandas as pd
-
-# below are three ways to get data from db, the third one - dataFrame - might be the best for use with pandas (and other libraries as well?)
-# not sure as of now, in which format I'll need the data for specific analyses, will be adding specific methods later
-# I had some trouble with adding the 'person_id' parameter to the SQL query, especially in the all_info_pandas_df
-# the solution seems to work but PyCharm doesn't like the syntax, not sure why
-
+import numpy as np
+from pandas import to_datetime
 
 # saves rows as tuple into a list, values in a specific "column"/position can be accessed through [i]
 def all_info(person_id):
@@ -76,15 +72,25 @@ def kilometers_data(person_id):
     return dataFrame
 
 def time_data(person_id):
-    from pandas import to_datetime
-    conn = sqlite3.connect("orisdb.db")
-    dataFrame = pd.read_sql_query('''select "date", discipline, distance, controls, time, startTime, finishTime  from results
+    conn = sqlite3.connect("D:\oris_files\oris\orisdb.db")
+    dataFrame = pd.read_sql_query('''select "date", discipline, distance, controls, time from results
                                     left join races on results.eventId = races.id
                                     left join classes on results.classId=classes.id
                                     where userId = %s''' % person_id, conn)
     conn.close()
     # changing date to month only, dont care about the rest for now
-    dataFrame["date"] = to_datetime(dataFrame["date"]).dt.month
+
+    dataFrame['date'] = to_datetime(dataFrame['date']).dt.month
+    dataFrame['time_min']=""
+    rows = len(dataFrame.index)
+    for row in range (rows):
+        minutes = 0.00
+        seconds = 0.00
+        if dataFrame['time'][row] == 'DISK':
+            dataFrame['time_min'][row] = 0
+        else:
+            minutes, seconds = dataFrame['time'][row].split(":", 1)
+            dataFrame['time_min'][row] = float(minutes) + float(seconds) / 60
     return dataFrame
 
 def find_users (name):
@@ -99,21 +105,14 @@ def find_users (name):
     conn.close()
     return rows
 
-# testovaci vystupy metod
-# all_info = all_info(2812)
-# print(all_info)
-#
-# all_info2 = all_info_row(2812)
-# print(all_info2)
-#
-# all_info_df = all_info_pandas_df(2812)
-# print(all_info_df)
-#
-# map_df = map_data(2812)
-# print(map_df)
+def get_user_data (oris_id):
+    conn = sqlite3.connect("orisdb.db")
+    cur = conn.cursor()
+    cur.execute('''select registered.id, firstName, lastName, regNo, clubTxt from registered
+                    LEFT JOIN clubs on registered.clubId = clubs.id
+                    where registered.id == ? ''', [oris_id])
+    data = cur.fetchall()
+    return data
 
-# time_df = time_data(2812)
-# print(time_df)
-
-# users = find_users('Knap')
-# print(users)
+# df = time_data(2812)
+# print(df)
