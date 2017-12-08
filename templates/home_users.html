@@ -4,11 +4,17 @@
 
 <div class="jumbotron text-center">
     <h1>Vítejte na ORIS dashboards</h1>
-    <p class="lead">Dashboardy a vizualizace nad tvými daty ze závodů v orientačním běhu tady a teď.</p>
+    <p class="lead">Vizualizace Vašich dat ze závodů v orientačním běhu tady a teď.</p>
 </div>
 
 
-<p>Nalezené osoby:</p>
+<p class="lead">Nalezené osoby:</p>
+
+{% if length == 0 %}
+<h4><b>Je nám líto :(</b></h4>
+<p>Žádný závodník s tímto příjmením nebyl nalezen.
+    <br>Zkus příjmení s diakritikou zadat znovu.</p>
+{% endif %}
 
 <ul>
 {% for user in users %}

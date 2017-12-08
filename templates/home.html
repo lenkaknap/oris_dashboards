@@ -7,12 +7,22 @@
     <p class="lead">Vizualizace Vašich dat ze závodů v orientačním běhu tady a teď.</p>
 </div>
 
+<p class="lead">Vyhledávání podle příjmení závodníka</p>
 <form action="/users" method="post">
     <label>
-        Zadejte PŘÍJMENÍ:
-        <input type="text" name="name"/>
+        <label for="name">Zadejte příjmení:</label>
+        <input type="text" class="form-control" name="name"/>
     </label>
-    <button type="submit">Confirm</button>
+    <button type="submit" class="btn btn-success">Vyhledat</button>
 </form>
+
+<!--<p class="lead"><br>Vyhledávání podle registračního čísla závodníka</p>-->
+<!--<form action="/users" method="post">-->
+    <!--<label>-->
+        <!--Zadejte registrační číslo:-->
+        <!--<input type="text" name="regNo"/>-->
+    <!--</label>-->
+    <!--<button type="submit">Vyhledat</button>-->
+<!--</form>-->
 
 {% endblock %}

@@ -3,51 +3,29 @@ import pandas as pd
 import numpy as np
 from pandas import to_datetime
 
-# saves rows as tuple into a list, values in a specific "column"/position can be accessed through [i]
-def all_info(person_id):
-    conn = sqlite3.connect('orisdb.db')
-    cur = conn.cursor()
-    cur.execute('''select * from results
-                left join races on results.eventId = races.id
-                left join classes on results.classId=classes.id
-                left join registered on results.userId=registered.id
-                left join clubs on registered.clubId = clubs.id
-                where userId = ?''', [person_id])
-    rows = []
-    for r in cur.fetchall():
-        rows.append(r)
-    conn.close()
-    return rows
-
-# saves rows as sqlite3.Row into a list, values in a specific column/position can be accessed through ["column_name"]
-def all_info_row(person_id):
-    conn = sqlite3.connect('orisdb.db')
-    with conn:
-        conn.row_factory = sqlite3.Row
-        cur = conn.cursor()
-        cur.execute('''select * from results
-                left join races on results.eventId = races.id
-                left join classes on results.classId=classes.id
-                left join registered on results.userId=registered.id
-                left join clubs on registered.clubId = clubs.id
-                where userId = {}'''.format(person_id))
-        rows = cur.fetchall()
-    conn.close()
-    return rows
-
 # uses pandas function and changes the sql query response into a dataframe
-def all_info_pandas_df(person_id):
-    conn = sqlite3.connect("orisdb.db")
-    if not isinstance(person_id, int):
-        raise Exception('person id is not int, I am not putting this into DB')
+def graphs_data(person_id):
+    conn = sqlite3.connect("D:\oris_files\oris\orisdb.db")
+    # if not isinstance(person_id, int):
+    #     raise Exception('person id is not int, I am not putting this into DB')
 
-    dataFrame = pd.read_sql_query('''select * from results
+    dataFrame = pd.read_sql_query('''select level, discipline, name, results.classTxt, date, latitude, longitude, distance, climbing, controls, time  from results
                                 left join races on results.eventId = races.id
                                 left join classes on results.classId=classes.id
-                                left join registered on results.userId=registered.id
-                                left join clubs on registered.clubId = clubs.id
                                 where userId = %s''' %person_id, conn)
     conn.close()
+    dataFrame['date'] = to_datetime(dataFrame['date']).dt.month
+    dataFrame['time_min'] = ""
+    rows = len(dataFrame.index)
+    unwanted = ['DISK', 'VZDAL', 'DNS']
+    for row in range(rows):
+        # minutes = 0.00
+        # seconds = 0.00
+        if dataFrame['time'][row] in unwanted or dataFrame['time'][row] == None:
+            dataFrame['time_min'][row] = 0
+        else:
+            minutes, seconds = dataFrame['time'][row].split(":", 1)
+            dataFrame['time_min'][row] = float(minutes) + float(seconds) / 60
     return dataFrame
 
 # selecting only relevant columns for the map with markers
@@ -83,10 +61,11 @@ def time_data(person_id):
     dataFrame['date'] = to_datetime(dataFrame['date']).dt.month
     dataFrame['time_min']=""
     rows = len(dataFrame.index)
+    unwanted = ['DISK', 'VZDAL', 'DNS']
     for row in range (rows):
-        minutes = 0.00
-        seconds = 0.00
-        if dataFrame['time'][row] == 'DISK':
+        # minutes = 0.00
+        # seconds = 0.00
+        if dataFrame['time'][row] in unwanted or dataFrame['time'][row] == None:
             dataFrame['time_min'][row] = 0
         else:
             minutes, seconds = dataFrame['time'][row].split(":", 1)

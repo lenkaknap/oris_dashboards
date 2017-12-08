@@ -2,17 +2,48 @@
 
 {% block body %}
 
+<div class="jumbotron text-center">
+    <h1>{{ '{} {}'.format(user_data[0][1], user_data[0][2]) }}</h1>
+    <p class="lead">{{ '{}, {}'.format(user_data[0][3], user_data[0][4]) }}</p>
+</div>
 
-<h2><b>{{ '{} {}'.format(user_data[0][1], user_data[0][2]) }}</b></h2>
-<h3>{{ '{}, {}'.format(user_data[0][3], user_data[0][4]) }}</h3>
+<div class="row">
+    <div class="col-md-4 col-xs-12">
+        <h3>Základní statistiky</h3><br>
 
-{{ div_map }}
+        <h3>{{ '{} km'.format(text_data[1]) }}</h3>
+        <img src="http://freevector.co/wp-content/uploads/2012/04/32443-odometer-for-kilometers-and-speed-control.png" alt="Smiley face" height="42" width="42">
+        <p>Celkové kilometry</p><br>
 
-{{ div_time }}
+        <h3>{{ '{} hodin'.format(text_data[0]) }}</h3>
+        <p>Celkový čas</p><br>
 
-{{ div_km }}
+        <h4>Průměrné tempo (km vzdušnou čarou)</h4>
+        <p>Klasická trať:<br>
+            {{ '{} min/km ({} min/km - {} min/km)'.format(text_data[3], text_data[4], text_data[5]) }}<br><br>
+            Krátká trať:<br>
+            {{ '{} min/km ({} min/km - {} min/km)'.format(text_data[6], text_data[7], text_data[8]) }}<br><br>
+            Sprintová trať:<br>
+            {{ '{} min/km ({} min/km - {} min/km)'.format(text_data[9], text_data[10], text_data[11]) }}</p>
+    </div>
+    <div class="col-md-8 col-xs-12">
+        {{ div_map }}
+    </div>
+</div>
 
-{{ div_controls }}
 
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        {{ div_time }}
+    </div>
+
+    <div class="col-md-6 col-xs-12">
+        {{ div_km }}
+    </div>
+</div>
+
+<div class="row">
+    {{ div_controls }}
+</div>
 
 {% endblock %}
