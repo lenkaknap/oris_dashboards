@@ -3,9 +3,12 @@ import pandas as pd
 import numpy as np
 from pandas import to_datetime
 
+import os
+cur_dir = os.path.dirname(os.path.abspath(__file__))
+db_location = cur_dir + '/orisdb.db'
 # uses pandas function and changes the sql query response into a dataframe
 def graphs_data(person_id):
-    conn = sqlite3.connect("orisdb.db")
+    conn = sqlite3.connect(db_location)
     # if not isinstance(person_id, int):
     #     raise Exception('person id is not int, I am not putting this into DB')
 
@@ -30,7 +33,7 @@ def graphs_data(person_id):
 
 # selecting only relevant columns for the map with markers
 def map_data(person_id):
-    conn = sqlite3.connect("orisdb.db")
+    conn = sqlite3.connect(db_location)
     dataFrame = pd.read_sql_query('''select name, discipline, results.classTxt, latitude, longitude, date from results
                                     left join races on results.eventId = races.id
                                     where userId = %s''' % person_id, conn)
@@ -39,7 +42,7 @@ def map_data(person_id):
 
 def kilometers_data(person_id):
     from pandas import to_datetime
-    conn = sqlite3.connect("orisdb.db")
+    conn = sqlite3.connect(db_location)
     dataFrame = pd.read_sql_query('''select "date", discipline, distance, controls  from results
                                     left join races on results.eventId = races.id
                                     left join classes on results.classId=classes.id
@@ -50,7 +53,7 @@ def kilometers_data(person_id):
     return dataFrame
 
 def time_data(person_id):
-    conn = sqlite3.connect("orisdb.db")
+    conn = sqlite3.connect(db_location)
     dataFrame = pd.read_sql_query('''select "date", discipline, distance, controls, time from results
                                     left join races on results.eventId = races.id
                                     left join classes on results.classId=classes.id
@@ -73,7 +76,7 @@ def time_data(person_id):
     return dataFrame
 
 def find_users (name):
-    conn = sqlite3.connect("orisdb.db")
+    conn = sqlite3.connect(db_location)
     cur = conn.cursor()
     cur.execute('''select registered.id, firstName, lastName, regNo, clubTxt from registered
                     LEFT JOIN clubs on registered.clubId = clubs.id
@@ -85,7 +88,7 @@ def find_users (name):
     return rows
 
 def get_user_data (oris_id):
-    conn = sqlite3.connect("orisdb.db")
+    conn = sqlite3.connect(db_location)
     cur = conn.cursor()
     cur.execute('''select registered.id, firstName, lastName, regNo, clubTxt from registered
                     LEFT JOIN clubs on registered.clubId = clubs.id
