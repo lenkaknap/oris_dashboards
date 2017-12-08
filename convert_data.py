@@ -5,7 +5,7 @@ from pandas import to_datetime
 
 # uses pandas function and changes the sql query response into a dataframe
 def graphs_data(person_id):
-    conn = sqlite3.connect("D:\oris_files\oris\orisdb.db")
+    conn = sqlite3.connect("orisdb.db")
     # if not isinstance(person_id, int):
     #     raise Exception('person id is not int, I am not putting this into DB')
 
@@ -50,7 +50,7 @@ def kilometers_data(person_id):
     return dataFrame
 
 def time_data(person_id):
-    conn = sqlite3.connect("D:\oris_files\oris\orisdb.db")
+    conn = sqlite3.connect("orisdb.db")
     dataFrame = pd.read_sql_query('''select "date", discipline, distance, controls, time from results
                                     left join races on results.eventId = races.id
                                     left join classes on results.classId=classes.id
