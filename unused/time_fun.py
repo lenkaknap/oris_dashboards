@@ -1,9 +1,11 @@
-from convert_data import time_data
+
 import pandas as pd
 import sqlite3
 from convert_data import graphs_data
 
-import math
+from datetime import datetime
+from datetime import timedelta
+
 def text_data(dataFrame):
     df = dataFrame
     rows = len(df.index)
@@ -51,6 +53,32 @@ def text_data(dataFrame):
                        pace_middle_mean, pace_middle_min, pace_middle_max,
                        pace_sprint_mean, pace_sprint_min, pace_sprint_max))
     return statistics
+
+def km_by_discipline(data_frame):
+    df=data_frame
+    rows = len(df.index)
+
+    sum_km_long = 0
+    sum_km_middle = 0
+    sum_km_sprint = 0
+
+    statistics=[]
+
+    for i in range (rows):
+        if df["discipline"][i] == 1:
+            sum_km_long += df["distance"][i]
+        elif df['discipline'][i] == 2:
+            sum_km_middle += df['distance'][i]
+        elif df['discipline'][i] == 3:
+            sum_km_sprint += df['distance'][i]
+
+    sum_km_long = str(round(sum_km_long, 2))
+    sum_km_middle = str(round(sum_km_middle, 2))
+    sum_km_sprint = str(round(sum_km_sprint, 2))
+
+    statistics.extend((sum_km_long, sum_km_middle, sum_km_sprint))
+    return statistics
+
 
 
 

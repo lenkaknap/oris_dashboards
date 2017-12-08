@@ -7,43 +7,141 @@
     <p class="lead">{{ '{}, {}'.format(user_data[0][3], user_data[0][4]) }}</p>
 </div>
 
+<h2>Přehledy za sezónu 2017</h2>
 <div class="row">
     <div class="col-md-4 col-xs-12">
-        <h3>Základní statistiky</h3><br>
+        <h3>Základní statistiky</h3>
 
-        <h3>{{ '{} km'.format(text_data[1]) }}</h3>
-        <img src="http://freevector.co/wp-content/uploads/2012/04/32443-odometer-for-kilometers-and-speed-control.png" alt="Smiley face" height="42" width="42">
-        <p>Celkové kilometry</p><br>
+        <div class="row">
+            <div class="col-md-4 col-xs-3">
+                <br>
+                <img src="https://cdn0.iconfinder.com/data/icons/thin-navigation/24/thin-0545_map_travel_distance_directions-512.png" alt="distance" height="60" width="60">
+            </div>
 
-        <h3>{{ '{} hodin'.format(text_data[0]) }}</h3>
-        <p>Celkový čas</p><br>
+            <div class="col-md-8 col-xs-9">
+                <h3><b>{{ '{} km'.format(text_data[1]) }}</b></h3>
+                <p>Celkové kilometry</p>
+            </div>
+        </div>
 
-        <h4>Průměrné tempo (km vzdušnou čarou)</h4>
-        <p>Klasická trať:<br>
-            {{ '{} min/km ({} min/km - {} min/km)'.format(text_data[3], text_data[4], text_data[5]) }}<br><br>
-            Krátká trať:<br>
-            {{ '{} min/km ({} min/km - {} min/km)'.format(text_data[6], text_data[7], text_data[8]) }}<br><br>
-            Sprintová trať:<br>
-            {{ '{} min/km ({} min/km - {} min/km)'.format(text_data[9], text_data[10], text_data[11]) }}</p>
+        <div class="row">
+            <div class="col-md-4 col-xs-3">
+                <br>
+                <img src="http://www.freeiconspng.com/uploads/stopwatch-icon-2.png" alt="time" height="60" width="60">
+            </div>
+            <div class="col-md-8 col-xs-9">
+                <h3><b>{{ '{} hod'.format(text_data[0]) }}</b></h3>
+                <p>Celkový čas</p>
+            </div>
+        </div>
+
+         <div class="row">
+            <div class="col-md-4 col-xs-3">
+                <br>
+                <img src="https://cdn4.iconfinder.com/data/icons/orienteering/100/Course-2-512.png" alt="control" height="60" width="60">
+            </div>
+            <div class="col-md-8 col-xs-9">
+                <h3><b>{{ '{} kontrol'.format(text_data[2]) }}</b></h3>
+                <p>Celkový počet nalezených kontrol</p>
+            </div>
+        </div>
+
+        <br>
+        <h3>Průměrné tempo</h3>
+        <br>
+        <div class="row">
+            <div class="col-md-4 col-xs-3">
+                <p>Klasická trať</p>
+            </div>
+
+            <div class="col-md-8 col-xs-9">
+                <p style="font-size:18px"><b>{{ '{} min/km'.format(text_data[3]) }}</b></p>
+                <!--<p>{{ '{} - {} min/km'.format(text_data[4], text_data[5]) }}</p>-->
+            </div>
+        </div>
+
+          <div class="row">
+            <div class="col-md-4 col-xs-3">
+                <p>Krátká trať</p>
+            </div>
+
+            <div class="col-md-8 col-xs-9">
+                <p style="font-size:18px"><b>{{ '{} min/km'.format(text_data[6]) }}</b></p>
+                <!--<p>{{ '{} - {} min/km'.format(text_data[7], text_data[8]) }}</p>-->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-xs-3">
+                <p>Sprint</p>
+            </div>
+
+            <div class="col-md-8 col-xs-9">
+                <p style="font-size:18px"><b>{{ '{} min/km'.format(text_data[9]) }}</b></p>
+                <!--<p>{{ '{} - {} min/km'.format(text_data[10], text_data[11]) }}</p>-->
+            </div>
+        </div>
     </div>
+
     <div class="col-md-8 col-xs-12">
+        <h3>Moje závody v mapě</h3><br>
         {{ div_map }}
     </div>
 </div>
 
 
 <div class="row">
-    <div class="col-md-6 col-xs-12">
-        {{ div_time }}
+    <div class="col-md-4 col-xs-12">
+        <h3>Naběhaný čas</h3><br>
+        <h3><b>{{ '{} hod'.format(text_time[0]) }}</b></h3>
+        <p>Klasická trať</p><br>
+
+        <h3><b>{{ '{} hod'.format(text_time[1]) }}</b></h3>
+        <p>Krátká trať</p><br>
+
+        <h3><b>{{ '{} hod'.format(text_time[2]) }}</b></h3>
+        <p>Sprint</p><br>
     </div>
 
-    <div class="col-md-6 col-xs-12">
+    <div class="col-md-8 col-xs-12">
+        {{ div_time }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-xs-12">
+        <h3>Naběhané kilometry</h3><br>
+        <h3><b>{{ '{} km'.format(text_km[0]) }}</b></h3>
+        <p>Klasická trať</p><br>
+
+        <h3><b>{{ '{} km'.format(text_km[1]) }}</b></h3>
+        <p>Krátká trať</p><br>
+
+        <h3><b>{{ '{} km'.format(text_km[2]) }}</b></h3>
+        <p>Sprint</p><br>
+    </div>
+
+    <div class="col-md-8 col-xs-12">
         {{ div_km }}
     </div>
 </div>
 
 <div class="row">
-    {{ div_controls }}
+    <div class="col-md-4 col-xs-12">
+        <h3>Nalezené kontroly</h3><br>
+        <h3><b>{{ '{} kontol'.format(text_controls[0]) }}</b></h3>
+        <p>Klasická trať</p><br>
+
+        <h3><b>{{ '{} kontrol'.format(text_controls[1]) }}</b></h3>
+        <p>Krátká trať</p><br>
+
+        <h3><b>{{ '{} kontrol'.format(text_controls[2]) }}</b></h3>
+        <p>Sprint</p><br>
+    </div>
+
+    <div class="col-md-8 col-xs-12">
+        {{ div_controls }}
+    </div>
 </div>
 
 {% endblock %}
