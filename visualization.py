@@ -26,17 +26,32 @@ def text_info(data_frame):
         elif df['discipline'][i] == 3:
             pace_sprint.append(pace)
 
-    pace_long_mean = str(round(sum(pace_long) / len(pace_long), 2))
-    pace_long_min = str(round(min(pace_long), 2))
-    pace_long_max = str(round(max(pace_long), 2))
+    if len(pace_long) == 0:
+        pace_long_mean = 0
+        pace_long_min = 0
+        pace_long_max = 0
+    else:
+        pace_long_mean = str(round(sum(pace_long) / len(pace_long), 2))
+        pace_long_min = str(round(min(pace_long), 2))
+        pace_long_max = str(round(max(pace_long), 2))
 
-    pace_middle_mean = str(round(sum(pace_middle) / len(pace_middle), 2))
-    pace_middle_min = str(round(min(pace_middle), 2))
-    pace_middle_max = str(round(max(pace_middle), 2))
+    if len(pace_middle) == 0:
+        pace_middle_mean = 0
+        pace_middle_min = 0
+        pace_middle_max = 0
+    else:
+        pace_middle_mean = str(round(sum(pace_middle) / len(pace_middle), 2))
+        pace_middle_min = str(round(min(pace_middle), 2))
+        pace_middle_max = str(round(max(pace_middle), 2))
 
-    pace_sprint_mean = str(round(sum(pace_sprint) / len(pace_sprint), 2))
-    pace_sprint_min = str(round(min(pace_sprint), 2))
-    pace_sprint_max = str(round(max(pace_sprint), 2))
+    if len(pace_sprint) == 0:
+        pace_sprint_mean = 0
+        pace_sprint_min = 0
+        pace_sprint_max = 0
+    else:
+        pace_sprint_mean = str(round(sum(pace_sprint) / len(pace_sprint), 2))
+        pace_sprint_min = str(round(min(pace_sprint), 2))
+        pace_sprint_max = str(round(max(pace_sprint), 2))
 
     # list to put the values in
     statistics = []
@@ -189,12 +204,24 @@ def bar_graph_stacked_time(data_frame):
     data = [trace1, trace2, trace3]
     layout = go.Layout(
         barmode='stack',
-        title='ČAS (v minutách) naběhaný za jednotlivé měsíce',
-        font=dict(family='sans-serif')
+        yaxis=dict(
+            title='minuty'
+        ),
+        font=dict(
+            family='sans-serif',
+            size=14
+        ),
+        margin=go.Margin(
+            l=60,
+            t=40,
+            b=50,
+            pad=4
+        )
     )
     fig = go.Figure(data=data, layout=layout)
     fig_plot = plotly.offline.plot(fig, output_type='div')
     return fig_plot
+
 def time_by_discipline(data_frame):
     df=data_frame
     rows = len(df.index)
@@ -309,13 +336,25 @@ def bar_graph_stacked_km(data_frame):
     data = [trace1, trace2, trace3]
     layout = go.Layout(
     barmode='stack',
-    title='KILOMETRY naběhané za jednotlivé měsíce',
-    font=dict(family='sans-serif')
+    yaxis=dict(
+        title='kilometry'
+    ),
+    font=dict(
+        family='sans-serif',
+        size=14
+    ),
+    margin=go.Margin(
+        l=60,
+        t=40,
+        b=50,
+        pad=4
+    )
     )
 
     fig = go.Figure(data=data, layout=layout)
     fig_plot = plotly.offline.plot(fig, output_type='div')
     return fig_plot
+
 def km_by_discipline(data_frame):
     df=data_frame
     rows = len(df.index)
@@ -430,13 +469,25 @@ def bar_graph_stacked_controls(data_frame):
     data = [trace1, trace2, trace3]
     layout = go.Layout(
     barmode='stack',
-    title='KONTROLY nalezené za jednotlivé měsíce',
-    font=dict(family='sans-serif')
+    yaxis=dict(
+        title='kontroly'
+    ),
+    font=dict(
+        family='sans-serif',
+        size=14
+    ),
+    margin=go.Margin(
+        l=60,
+        t=40,
+        b=50,
+        pad=4
+    )
     )
 
     fig = go.Figure(data=data, layout=layout)
     fig_plot = plotly.offline.plot(fig, output_type='div')
     return fig_plot
+
 def controls_by_discipline(data_frame):
     df=data_frame
     rows = len(df.index)
