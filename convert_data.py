@@ -10,9 +10,9 @@ db_location = cur_dir + '/orisdb.db'
 def find_users (name):
     conn = sqlite3.connect(db_location)
     cur = conn.cursor()
-    cur.execute('''select registered.id, firstName, lastName, regNo, clubTxt from registered
-                    LEFT JOIN clubs on registered.clubId = clubs.id
-                    where lastName LIKE ?''', [name+'%'])
+    cur.execute('''SELECT registered.id, firstName, lastName, regNo, clubTxt FROM registered
+                    LEFT JOIN clubs ON registered.clubId = clubs.id
+                    WHERE lastName LIKE ?''', (name+'%',))
     rows = []
     for r in cur.fetchall():
         rows.append(r)
@@ -23,10 +23,11 @@ def find_users (name):
 def get_user_data (oris_id):
     conn = sqlite3.connect(db_location)
     cur = conn.cursor()
-    cur.execute('''select registered.id, firstName, lastName, regNo, clubTxt from registered
-                    LEFT JOIN clubs on registered.clubId = clubs.id
-                    where registered.id == ? ''', [oris_id])
+    cur.execute('''SELECT registered.id, firstName, lastName, regNo, clubTxt FROM registered
+                    LEFT JOIN clubs ON registered.clubId = clubs.id
+                    WHERE registered.id == ? ''', [oris_id])
     data = cur.fetchall()
+    conn.close()
     return data
 
 # uses pandas function and changes the sql query response into a dataframe
@@ -35,10 +36,10 @@ def graphs_data(person_id):
     # if not isinstance(person_id, int):
     #     raise Exception('person id is not int, I am not putting this into DB')
 
-    dataFrame = pd.read_sql_query('''select level, discipline, name, results.classTxt, date, latitude, longitude, distance, climbing, controls, time  from results
-                                left join races on results.eventId = races.id
-                                left join classes on results.classId=classes.id
-                                where userId = %s''' %person_id, conn)
+    dataFrame = pd.read_sql_query('''SELECT level, discipline, name, results.classTxt, date, latitude, longitude, distance, climbing, controls, time  FROM results
+                                LEFT JOIN races ON results.eventId = races.id
+                                LEFT JOIN classes ON results.classId=classes.id
+                                WHERE userId = %s''' %person_id, conn)
     conn.close()
 
     dataFrame['date_month'] = to_datetime(dataFrame['date']).dt.month

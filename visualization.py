@@ -8,13 +8,27 @@ def text_info(data_frame):
 
     sum_time_hr = str(round(df['time_min'].sum() / 60, 2))
 
-    sum_km = str(round(df['distance'].sum(), 2))
-    sum_controls = str(df['controls'].sum())
+    sum_km = 0
+    for i in range (rows):
+        if df['time_min'][i] == 0:
+            continue
+        else:
+            sum_km += df['distance'][i]
+    sum_km = str(round(sum_km, 2))
+
+    sum_controls = 0
+    for i in range(rows):
+        if df['time_min'][i] == 0:
+            continue
+        else:
+            sum_controls += df['controls'][i]
+    sum_controls = str(round(sum_controls, 2))
 
     # lists for paces in specific disciplines
     pace_long = []
     pace_middle = []
     pace_sprint = []
+
     for i in range(rows):
         if df['time_min'][i] == 0:
             continue
@@ -27,27 +41,21 @@ def text_info(data_frame):
             pace_sprint.append(pace)
 
     if len(pace_long) == 0:
-        pace_long_mean = 0
-        pace_long_min = 0
-        pace_long_max = 0
+        pace_long_mean, pace_long_min, pace_long_max = 0, 0, 0
     else:
         pace_long_mean = str(round(sum(pace_long) / len(pace_long), 2))
         pace_long_min = str(round(min(pace_long), 2))
         pace_long_max = str(round(max(pace_long), 2))
 
     if len(pace_middle) == 0:
-        pace_middle_mean = 0
-        pace_middle_min = 0
-        pace_middle_max = 0
+        pace_middle_mean, pace_middle_min, pace_middle_max = 0, 0, 0
     else:
         pace_middle_mean = str(round(sum(pace_middle) / len(pace_middle), 2))
         pace_middle_min = str(round(min(pace_middle), 2))
         pace_middle_max = str(round(max(pace_middle), 2))
 
     if len(pace_sprint) == 0:
-        pace_sprint_mean = 0
-        pace_sprint_min = 0
-        pace_sprint_max = 0
+        pace_sprint_mean, pace_sprint_min, pace_sprint_max = 0, 0, 0
     else:
         pace_sprint_mean = str(round(sum(pace_sprint) / len(pace_sprint), 2))
         pace_sprint_min = str(round(min(pace_sprint), 2))
@@ -136,7 +144,7 @@ def bar_graph_stacked_time(data_frame):
                 march_middle_sum += df["time_min"][i]
             elif df["discipline"][i] == 3:
                 march_sprint_sum += df["time_min"][i]
-        if df["date_month"][i] == 4:
+        elif df["date_month"][i] == 4:
             if df["discipline"][i] == 1:
                 april_long_sum += df["time_min"][i]
             elif df["discipline"][i] == 2:
@@ -262,6 +270,8 @@ def bar_graph_stacked_km(data_frame):
     november_long_sum, november_middle_sum, november_sprint_sum = 0, 0, 0
 
     for i in range (rows):
+        if df['time_min'][i] == 0:
+            continue
         if df["date_month"][i] == 3:
             if df["discipline"][i] == 1:
                 march_long_sum += df["distance"][i]
@@ -269,7 +279,7 @@ def bar_graph_stacked_km(data_frame):
                 march_middle_sum += df["distance"][i]
             elif df["discipline"][i] == 3:
                 march_sprint_sum += df["distance"][i]
-        if df["date_month"][i] == 4:
+        elif df["date_month"][i] == 4:
             if df["discipline"][i] == 1:
                 april_long_sum += df["distance"][i]
             elif df["discipline"][i] == 2:
@@ -366,6 +376,8 @@ def km_by_discipline(data_frame):
     statistics=[]
 
     for i in range (rows):
+        if df['time_min'][i] == 0:
+            continue
         if df['discipline'][i] == 1:
             sum_km_long += df['distance'][i]
         elif df['discipline'][i] == 2:
@@ -395,6 +407,8 @@ def bar_graph_stacked_controls(data_frame):
     november_long_sum, november_middle_sum, november_sprint_sum = 0, 0, 0
 
     for i in range (rows):
+        if df['time_min'][i] == 0:
+            continue
         if df["date_month"][i] == 3:
             if df["discipline"][i] == 1:
                 march_long_sum += df["controls"][i]
@@ -402,7 +416,7 @@ def bar_graph_stacked_controls(data_frame):
                 march_middle_sum += df["controls"][i]
             elif df["discipline"][i] == 3:
                 march_sprint_sum += df["controls"][i]
-        if df["date_month"][i] == 4:
+        elif df["date_month"][i] == 4:
             if df["discipline"][i] == 1:
                 april_long_sum += df["controls"][i]
             elif df["discipline"][i] == 2:
@@ -499,6 +513,8 @@ def controls_by_discipline(data_frame):
     statistics=[]
 
     for i in range (rows):
+        if df['time_min'][i] == 0:
+            continue
         if df['discipline'][i] == 1:
             sum_controls_long += df['controls'][i]
         elif df['discipline'][i] == 2:
