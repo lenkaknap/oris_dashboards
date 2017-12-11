@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request
 from convert_data import find_users, get_user_data, graphs_data
 from visualization import text_info, map_scatter,\
     bar_graph_stacked_time, time_by_discipline,\

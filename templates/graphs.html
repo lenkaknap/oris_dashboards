@@ -2,16 +2,15 @@
 
 {% block body %}
 
-<div class="jumbotron text-center">
-    <h1>{{ '{} {}'.format(user_data[0][1], user_data[0][2]) }}</h1>
-    <p class="lead">{{ '{}, {}'.format(user_data[0][3], user_data[0][4]) }}</p>
+<div class="jumbotron text-center" style="background-color: rgba(0, 143, 149, 0.9);">
+    <h1 style="color: rgb(255, 255, 255)">{{ '{} {}'.format(user_data[0][1], user_data[0][2]) }}</h1>
+    <p class="lead" style="color: rgb(255, 255, 255)">{{ '{}, {}'.format(user_data[0][3], user_data[0][4]) }}</p>
 </div>
 
 <h1>Přehled za rok 2017</h1>
+<h3>Základní statistiky</h3>
 <div class="row">
     <div class="col-md-4 col-xs-12">
-        <h3>Základní statistiky</h3>
-
         <div class="row">
             <div class="col-md-4 col-xs-3">
                 <br>
@@ -51,22 +50,22 @@
         <br>
         <div class="row">
             <div class="col-md-4 col-xs-3">
-                <p>Klasická trať</p>
+                <p>Klasika</p>
             </div>
 
             <div class="col-md-8 col-xs-9">
-                <p style="font-size:18px"><b>{{ '{} min/km'.format(text_data[3]) }}</b></p>
+                <p style="font-size:1.25em"><b>{{ '{} min/km'.format(text_data[3]) }}</b></p>
                 <!--<p>{{ '{} - {} min/km'.format(text_data[4], text_data[5]) }}</p>-->
             </div>
         </div>
 
           <div class="row">
             <div class="col-md-4 col-xs-3">
-                <p>Krátká trať</p>
+                <p>Middle</p>
             </div>
 
             <div class="col-md-8 col-xs-9">
-                <p style="font-size:18px"><b>{{ '{} min/km'.format(text_data[6]) }}</b></p>
+                <p style="font-size:1.25em"><b>{{ '{} min/km'.format(text_data[6]) }}</b></p>
                 <!--<p>{{ '{} - {} min/km'.format(text_data[7], text_data[8]) }}</p>-->
             </div>
         </div>
@@ -77,14 +76,13 @@
             </div>
 
             <div class="col-md-8 col-xs-9">
-                <p style="font-size:18px"><b>{{ '{} min/km'.format(text_data[9]) }}</b></p>
+                <p style="font-size:1.25em"><b>{{ '{} min/km'.format(text_data[9]) }}</b></p>
                 <!--<p>{{ '{} - {} min/km'.format(text_data[10], text_data[11]) }}</p>-->
             </div>
         </div>
     </div>
 
     <div class="col-md-8 col-xs-12">
-        <h3>Závody v mapě</h3><br>
         {{ div_map }}
     </div>
 </div>
@@ -94,36 +92,34 @@
     <div class="col-md-4 col-xs-12">
         <br>
         <h3>Naběhaný čas</h3>
+        <br>
         <div class="row">
             <div class="col-md-4 col-xs-3">
-                <br>
-                <p>Klasická trať</p>
+                <p>Klasika</p>
             </div>
 
             <div class="col-md-8 col-xs-9">
-                <h3><b>{{ '{} hod'.format(text_time[0]) }}</b></h3>
+                <p style="font-size:1.25em"><b>{{ '{} hod'.format(text_time[0]) }}</b></p>
             </div>
         </div>
 
          <div class="row">
             <div class="col-md-4 col-xs-3">
-                <br>
-                <p>Krátká trať</p>
+                <p>Middle</p>
             </div>
 
             <div class="col-md-8 col-xs-9">
-                <h3><b>{{ '{} hod'.format(text_time[1]) }}</b></h3>
+                <p style="font-size:1.25em"><b>{{ '{} hod'.format(text_time[1]) }}</b></p>
             </div>
         </div>
 
          <div class="row">
             <div class="col-md-4 col-xs-3">
-                <br>
                 <p>Sprint</p>
             </div>
 
             <div class="col-md-8 col-xs-9">
-                <h3><b>{{ '{} hod'.format(text_time[2]) }}</b></h3>
+                <p style="font-size:1.25em"><b>{{ '{} hod'.format(text_time[2]) }}</b></p>
             </div>
         </div>
     </div>
@@ -137,36 +133,34 @@
     <div class="col-md-4 col-xs-12">
         <br>
         <h3>Naběhané kilometry</h3>
+        <br>
         <div class="row">
             <div class="col-md-4 col-xs-3">
-                <br>
-                <p>Klasická trať</p>
+                <p>Klasika</p>
             </div>
 
             <div class="col-md-8 col-xs-9">
-                <h3><b>{{ '{} km'.format(text_km[0]) }}</b></h3>
+                <p style="font-size:1.25em"><b>{{ '{} km'.format(text_km[0]) }}</b></p>
             </div>
         </div>
 
          <div class="row">
             <div class="col-md-4 col-xs-3">
-                <br>
-                <p>Krátká trať</p>
+                <p>Middle</p>
             </div>
 
             <div class="col-md-8 col-xs-9">
-                <h3><b>{{ '{} km'.format(text_km[1]) }}</b></h3>
+                <p style="font-size:1.25em"><b>{{ '{} km'.format(text_km[1]) }}</b></p>
             </div>
         </div>
 
          <div class="row">
             <div class="col-md-4 col-xs-3">
-                <br>
                 <p>Sprint</p>
             </div>
 
             <div class="col-md-8 col-xs-9">
-                <h3><b>{{ '{} km'.format(text_km[2]) }}</b></h3>
+                <p style="font-size:1.25em"><b>{{ '{} km'.format(text_km[2]) }}</b></p>
             </div>
         </div>
     </div>
@@ -180,36 +174,34 @@
     <div class="col-md-4 col-xs-12">
         <br>
         <h3>Nalezené kontroly</h3>
+        <br>
         <div class="row">
             <div class="col-md-4 col-xs-3">
-                <br>
-                <p>Klasická trať</p>
+                <p>Klasika</p>
             </div>
 
             <div class="col-md-8 col-xs-9">
-                <h3><b>{{ '{} kontrol'.format(text_controls[0]) }}</b></h3>
+                <p style="font-size:1.25em"><b>{{ '{} kontrol'.format(text_controls[0]) }}</b></p>
             </div>
         </div>
 
          <div class="row">
             <div class="col-md-4 col-xs-3">
-                <br>
-                <p>Krátká trať</p>
+                <p>Middle</p>
             </div>
 
             <div class="col-md-8 col-xs-9">
-                <h3><b>{{ '{} kontrol'.format(text_controls[1]) }}</b></h3>
+                <p style="font-size:1.25em"><b>{{ '{} kontrol'.format(text_controls[1]) }}</b></p>
             </div>
         </div>
 
          <div class="row">
             <div class="col-md-4 col-xs-3">
-                <br>
                 <p>Sprint</p>
             </div>
 
             <div class="col-md-8 col-xs-9">
-                <h3><b>{{ '{} kontrol'.format(text_controls[2]) }}</b></h3>
+                <p style="font-size:1.25em"><b>{{ '{} kontrol'.format(text_controls[2]) }}</b></p>
             </div>
         </div>
     </div>

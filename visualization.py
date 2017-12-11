@@ -75,7 +75,6 @@ def map_scatter(data_frame):
 
     df = data_frame
     rows = len(df.index)
-
     latitude_ls = df['latitude'].tolist()
     longitude_ls = df['longitude'].tolist()
     name_date = []
@@ -89,15 +88,14 @@ def map_scatter(data_frame):
             lon=longitude_ls,
             mode='markers',
             marker=go.Marker(
-                size=12
+                size=12,
+                color='rgb(0, 143, 149)'
             ),
             text= name_date,
         )
     ])
     layout = go.Layout(
-        # title='Mapa závodů za rok 2017',
         autosize=True,
-        showlegend=False,
         hovermode='y',
         mapbox=dict(
             accesstoken=mapbox_access_token,
@@ -193,6 +191,9 @@ def bar_graph_stacked_time(data_frame):
         y=[march_long_sum, april_long_sum, may_long_sum, june_long_sum,
            september_long_sum, october_long_sum, november_long_sum],
         name='klasika',
+        marker=dict(
+            color='rgb(0, 143, 149)'
+        ),
         opacity=0.9
     )
     trace2 = go.Bar(
@@ -200,6 +201,9 @@ def bar_graph_stacked_time(data_frame):
         y=[march_middle_sum, april_middle_sum, may_middle_sum, june_middle_sum,
            september_middle_sum, october_middle_sum, november_middle_sum],
         name='middle',
+        marker=dict(
+            color='rgb(226, 78, 66)'
+        ),
         opacity=0.9
     )
     trace3 = go.Bar(
@@ -207,6 +211,9 @@ def bar_graph_stacked_time(data_frame):
         y=[march_sprint_sum, april_sprint_sum, may_sprint_sum, june_sprint_sum,
            september_sprint_sum, october_sprint_sum, november_sprint_sum],
         name='sprint',
+        marker=dict(
+            color='rgb(233, 176, 0)'
+        ),
         opacity=0.9
     )
     data = [trace1, trace2, trace3]
@@ -327,6 +334,9 @@ def bar_graph_stacked_km(data_frame):
     y=[march_long_sum, april_long_sum, may_long_sum, june_long_sum,
        september_long_sum, october_long_sum, november_long_sum],
     name='klasika',
+    marker=dict(
+        color='rgb(0, 143, 149)'
+    ),
     opacity=0.9
     )
     trace2 = go.Bar(
@@ -334,6 +344,9 @@ def bar_graph_stacked_km(data_frame):
     y=[march_middle_sum, april_middle_sum, may_middle_sum, june_middle_sum,
        september_middle_sum, october_middle_sum, november_middle_sum],
     name='middle',
+    marker=dict(
+        color='rgb(226, 78, 66)'
+    ),
     opacity=0.9
     )
     trace3 = go.Bar(
@@ -341,6 +354,9 @@ def bar_graph_stacked_km(data_frame):
     y=[march_sprint_sum, april_sprint_sum, may_sprint_sum, june_sprint_sum,
        september_sprint_sum, october_sprint_sum, november_sprint_sum],
     name='sprint',
+    marker=dict(
+        color='rgb(233, 176, 0)'
+    ),
     opacity=0.9
     )
     data = [trace1, trace2, trace3]
@@ -464,6 +480,9 @@ def bar_graph_stacked_controls(data_frame):
     y=[march_long_sum, april_long_sum, may_long_sum, june_long_sum,
        september_long_sum, october_long_sum, november_long_sum],
     name='klasika',
+    marker=dict(
+        color='rgb(0, 143, 149)'
+    ),
     opacity=0.9
     )
     trace2 = go.Bar(
@@ -471,6 +490,9 @@ def bar_graph_stacked_controls(data_frame):
     y=[march_middle_sum, april_middle_sum, may_middle_sum, june_middle_sum,
        september_middle_sum, october_middle_sum, november_middle_sum],
     name='middle',
+    marker = dict(
+        color='rgb(226, 78, 66)'
+    ),
     opacity=0.9
     )
     trace3 = go.Bar(
@@ -478,6 +500,9 @@ def bar_graph_stacked_controls(data_frame):
     y=[march_sprint_sum, april_sprint_sum, may_sprint_sum, june_sprint_sum,
        september_sprint_sum, october_sprint_sum, november_sprint_sum],
     name='sprint',
+    marker=dict(
+        color='rgb(233, 176, 0)'
+    ),
     opacity=0.9
     )
     data = [trace1, trace2, trace3]
