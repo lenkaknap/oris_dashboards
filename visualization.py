@@ -30,7 +30,7 @@ def text_info(data_frame):
     pace_sprint = []
 
     for i in range(rows):
-        if df['time_min'][i] == 0:
+        if df['time_min'][i] == 0 or df['distance'][i] == 0:
             continue
         pace = df['time_min'][i] / df['distance'][i]
         if df['discipline'][i] == 1:

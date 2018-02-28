@@ -54,4 +54,3 @@ def graphs_data(person_id):
             minutes, seconds = dataFrame['time'][row].split(":", 1)
             dataFrame['time_min'][row] = float(minutes) + float(seconds) / 60
     return dataFrame
-
